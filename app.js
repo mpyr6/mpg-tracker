@@ -59,7 +59,14 @@ db.collection('MPG_Database').insertOne({
     return console.log('Unable to insert to database', err);
   }
   console.log(JSON.stringify(result.ops, undefined, 2));
+
+
 });
+
+var list = db.listCollections('MPG_Database');
+console.log(list);
+
+
 
   db.close();
 });
