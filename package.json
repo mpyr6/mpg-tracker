@@ -1,0 +1,15 @@
+{
+  "name": "mpg_calculator",
+  "version": "1.0.0",
+  "description": "MPG Calculator App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Wiesen",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^2.0.0",
+    "yargs": "^8.0.2"
+  }
+}
