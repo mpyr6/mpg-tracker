@@ -9750,6 +9750,10 @@ var _reactDom = __webpack_require__(98);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _mpg_form = __webpack_require__(185);
+
+var _mpg_form2 = _interopRequireDefault(_mpg_form);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9773,13 +9777,20 @@ var MyApp = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				'It works!'
+				_react2.default.createElement(
+					'h1',
+					null,
+					'Testing'
+				),
+				_react2.default.createElement(_mpg_form2.default, null)
 			);
 		}
 	}]);
 
 	return MyApp;
 }(_react2.default.Component);
+
+;
 
 _reactDom2.default.render(_react2.default.createElement(MyApp, null), document.getElementById('app'));
 
@@ -22418,6 +22429,97 @@ var ReactDOMInvalidARIAHook = {
 
 module.exports = ReactDOMInvalidARIAHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 184 */,
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MPGForm = function (_React$Component) {
+	_inherits(MPGForm, _React$Component);
+
+	function MPGForm() {
+		_classCallCheck(this, MPGForm);
+
+		return _possibleConstructorReturn(this, (MPGForm.__proto__ || Object.getPrototypeOf(MPGForm)).apply(this, arguments));
+	}
+
+	_createClass(MPGForm, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"form",
+				null,
+				_react2.default.createElement(
+					"label",
+					null,
+					"Miles"
+				),
+				_react2.default.createElement("input", { type: "text" }),
+				_react2.default.createElement("br", null),
+				_react2.default.createElement(
+					"label",
+					null,
+					"Gallons"
+				),
+				_react2.default.createElement("input", { type: "text" }),
+				_react2.default.createElement("br", null),
+				_react2.default.createElement(
+					"label",
+					null,
+					"Price"
+				),
+				_react2.default.createElement("input", { type: "text" }),
+				_react2.default.createElement("br", null),
+				_react2.default.createElement(
+					"label",
+					null,
+					"Gas Type"
+				),
+				_react2.default.createElement("input", { type: "radio", name: "type", value: "87", checked: true }),
+				" 87",
+				_react2.default.createElement("input", { type: "radio", name: "type", value: "89" }),
+				" 89",
+				_react2.default.createElement("input", { type: "radio", name: "type", value: "91" }),
+				" 91",
+				_react2.default.createElement("br", null),
+				_react2.default.createElement("br", null),
+				_react2.default.createElement(
+					"button",
+					null,
+					"Submit"
+				)
+			);
+		}
+	}]);
+
+	return MPGForm;
+}(_react2.default.Component);
+
+;
+
+exports.default = MPGForm;
 
 /***/ })
 /******/ ]);
