@@ -1,25 +1,50 @@
 import React from 'react';
 
 class MPGForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			miles:'', 
+			gallons:'', 
+			price:''
+		}
+
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+	handleSubmit(event) {
+		event.preventDefault();
+		console.log(this.state)
+	}
+
 	render() {
 		return (
-			<form>
-				<label>Miles</label>
-					<input type="text" />
+			<form onSubmit={this.handleSubmit}>
+				<label>Miles
+					<input name="miles" type="text" onChange={this.handleInputChange}/>
+				</label>
 					<br />
-				<label>Gallons</label>
-					<input type="text" />
+				<label>Gallons
+					<input name="gallons" type="text" onChange={this.handleInputChange}/>
+				</label>
 					<br />
-				<label>Price</label>
-					<input type="text" />
-					<br />
-				<label>Gas Type</label>
-				  <input type="radio" name="type" value="87" checked /> 87
-				  <input type="radio" name="type" value="89" /> 89
-				  <input type="radio" name="type" value="91" /> 91 
+				<label>Price
+					<input name="price" type="text" onChange={this.handleInputChange}/>
+				</label>
 				  <br />
 				  <br />
-				<button>Submit</button>
+				<input type="submit" value="Submit" />
 			</form>
 		)
 	}

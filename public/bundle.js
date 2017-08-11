@@ -22450,6 +22450,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22459,57 +22461,66 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var MPGForm = function (_React$Component) {
 	_inherits(MPGForm, _React$Component);
 
-	function MPGForm() {
+	function MPGForm(props) {
 		_classCallCheck(this, MPGForm);
 
-		return _possibleConstructorReturn(this, (MPGForm.__proto__ || Object.getPrototypeOf(MPGForm)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (MPGForm.__proto__ || Object.getPrototypeOf(MPGForm)).call(this, props));
+
+		_this.state = {
+			miles: '',
+			gallons: '',
+			price: ''
+		};
+
+		_this.handleInputChange = _this.handleInputChange.bind(_this);
+		_this.handleSubmit = _this.handleSubmit.bind(_this);
+		return _this;
 	}
 
 	_createClass(MPGForm, [{
-		key: "render",
+		key: 'handleInputChange',
+		value: function handleInputChange(event) {
+			var target = event.target;
+			var value = target.value;
+			var name = target.name;
+
+			this.setState(_defineProperty({}, name, value));
+		}
+	}, {
+		key: 'handleSubmit',
+		value: function handleSubmit(event) {
+			event.preventDefault();
+			console.log(this.state);
+		}
+	}, {
+		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				"form",
-				null,
+				'form',
+				{ onSubmit: this.handleSubmit },
 				_react2.default.createElement(
-					"label",
+					'label',
 					null,
-					"Miles"
+					'Miles',
+					_react2.default.createElement('input', { name: 'miles', type: 'text', onChange: this.handleInputChange })
 				),
-				_react2.default.createElement("input", { type: "text" }),
-				_react2.default.createElement("br", null),
+				_react2.default.createElement('br', null),
 				_react2.default.createElement(
-					"label",
+					'label',
 					null,
-					"Gallons"
+					'Gallons',
+					_react2.default.createElement('input', { name: 'gallons', type: 'text', onChange: this.handleInputChange })
 				),
-				_react2.default.createElement("input", { type: "text" }),
-				_react2.default.createElement("br", null),
+				_react2.default.createElement('br', null),
 				_react2.default.createElement(
-					"label",
+					'label',
 					null,
-					"Price"
+					'Price',
+					_react2.default.createElement('input', { name: 'price', type: 'text', onChange: this.handleInputChange })
 				),
-				_react2.default.createElement("input", { type: "text" }),
-				_react2.default.createElement("br", null),
-				_react2.default.createElement(
-					"label",
-					null,
-					"Gas Type"
-				),
-				_react2.default.createElement("input", { type: "radio", name: "type", value: "87", checked: true }),
-				" 87",
-				_react2.default.createElement("input", { type: "radio", name: "type", value: "89" }),
-				" 89",
-				_react2.default.createElement("input", { type: "radio", name: "type", value: "91" }),
-				" 91",
-				_react2.default.createElement("br", null),
-				_react2.default.createElement("br", null),
-				_react2.default.createElement(
-					"button",
-					null,
-					"Submit"
-				)
+				_react2.default.createElement('br', null),
+				_react2.default.createElement('br', null),
+				_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 			);
 		}
 	}]);
