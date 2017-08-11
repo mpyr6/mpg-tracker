@@ -2,6 +2,9 @@ const yargs = require('yargs');
 const dateFormat = require('dateformat')
 var now = new Date();
 const {MongoClient, ObjectID} = require('mongodb');
+const express = require('express');
+const mongoose = require('mongoose');
+var fillUpData = require('./models/mpgs');
 
 const argv = yargs
   .options({
@@ -27,7 +30,6 @@ const argv = yargs
     }
   })
   .help()
-  // .alias(help,h)
   .argv;
 
 var miles = argv.miles;
@@ -41,32 +43,39 @@ var mpg = (range, fuel) => {
 
 
 
-MongoClient.connect('mongodb://localhost:27017/MPG_Calculator', (err, db) => {
-  if (err) {
-    return console.log('Unable to connect to MongoDB server');
-  }
-  console.log('Connected to MongoDB server');
 
-db.collection('MPG_Database').insertOne({
+mongoose.connect('mongodb://localhost:27017/MPG_Calculator',{useMongoClient: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB - Conneciton Error'));
+
+var entry = {
   filldate: date,
   distance: miles,
   galAmount: gallons,
-  effeciency: mpg(miles,gallons),
+  efficiency: mpg(miles,gallons),
   gasPrice: price,
   fuel: gas
-}, (err,result) => {
-  if (err) {
-    return console.log('Unable to insert to database', err);
+}
+
+fillUpData.create(entry, function(err, datas){
+  if(err){
+    throw err;
   }
-  console.log(JSON.stringify(result.ops, undefined, 2));
-
-
+  console.log(datas);
 });
 
-var list = db.listCollections('MPG_Database');
-console.log(list);
-
-
-
-  db.close();
-});
+// db.collection('MPG_Database').insertOne({
+//   filldate: date,
+//   distance: miles,
+//   galAmount: gallons,
+//   effeciency: mpg(miles,gallons),
+//   gasPrice: price,
+//   fuel: gas
+// }, (err,result) => {
+//   if (err) {
+//     return console.log('Unable to insert to database', err);
+//   }
+//   console.log(JSON.stringify(result.ops, undefined, 2));
+//
+//
+// });
