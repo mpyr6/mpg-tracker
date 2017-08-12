@@ -8,7 +8,8 @@ var mpgSchema = mongoose.Schema({
   galAmount: Number,
   efficiency: Number,
   gasPrice: Number,
-  fuel: String
+  fuel: String,
+  totalCost: Number
 });
 
 var FillUpData = mongoose.model('mpg', mpgSchema);

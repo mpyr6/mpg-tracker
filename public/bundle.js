@@ -10443,6 +10443,10 @@ var _mpg_form = __webpack_require__(191);
 
 var _mpg_form2 = _interopRequireDefault(_mpg_form);
 
+var _mpg_list = __webpack_require__(213);
+
+var _mpg_list2 = _interopRequireDefault(_mpg_list);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10468,18 +10472,11 @@ var MyApp = function (_React$Component) {
 				{ className: 'container' },
 				_react2.default.createElement(
 					'h2',
-					{ className: 'title' },
+					{ className: 'title is-3' },
 					'MPG Tracker'
 				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'columns' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'column is-5 box' },
-						_react2.default.createElement(_mpg_form2.default, null)
-					)
-				)
+				_react2.default.createElement(_mpg_form2.default, null),
+				_react2.default.createElement(_mpg_list2.default, null)
 			);
 		}
 	}]);
@@ -23138,6 +23135,10 @@ var _axios = __webpack_require__(192);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _disp_snippet = __webpack_require__(212);
+
+var _disp_snippet2 = _interopRequireDefault(_disp_snippet);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23161,11 +23162,15 @@ var MPGForm = function (_React$Component) {
 		_this.state = {
 			miles: null,
 			gallons: null,
-			price: null
+			price: null,
+			gasType: null,
+			totalCost: null,
+			mpg: null
 		};
 
 		_this.handleInputChange = _this.handleInputChange.bind(_this);
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
+		_this.handleCalcs = _this.handleCalcs.bind(_this);
 		return _this;
 	}
 
@@ -23173,6 +23178,20 @@ var MPGForm = function (_React$Component) {
 
 
 	_createClass(MPGForm, [{
+		key: 'handleCalcs',
+		value: function handleCalcs() {
+			var calcCost = this.state.gallons === null || this.state.price === null ? null : (this.state.gallons * this.state.price).toFixed(2);
+			var calcMPG = this.state.gallons === null || this.state.miles === null ? null : (this.state.miles / this.state.gallons).toFixed(2);
+
+			var finalMPG = isFinite(calcMPG) ? calcMPG : null;
+			var finalCost = calcCost !== 0 && isFinite(calcCost) ? calcCost : null;
+
+			this.setState({
+				totalCost: calcCost,
+				mpg: finalMPG
+			});
+		}
+	}, {
 		key: 'handleInputChange',
 		value: function handleInputChange(event) {
 			var target = event.target;
@@ -23187,11 +23206,13 @@ var MPGForm = function (_React$Component) {
 	}, {
 		key: 'handleSubmit',
 		value: function handleSubmit(event) {
-			event.preventDefault();
 			var dataSet = [{
 				distance: this.state.miles,
 				galAmount: this.state.gallons,
-				gasPrice: this.state.price
+				efficiency: this.state.mpg,
+				gasPrice: this.state.price,
+				fuel: this.state.gasType,
+				totalCost: this.state.totalCost
 			}];
 			_axios2.default.post("/db", dataSet);
 		}
@@ -23202,52 +23223,88 @@ var MPGForm = function (_React$Component) {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'form',
-				{ onSubmit: this.handleSubmit },
+				'div',
+				{ className: 'section box', style: { paddingTop: '20px', paddingBottom: '20px' } },
 				_react2.default.createElement(
-					'div',
-					{ className: 'field' },
-					_react2.default.createElement(
-						'label',
-						{ className: 'label' },
-						'Miles'
-					),
-					_react2.default.createElement('input', { className: 'input',
-						name: 'miles',
-						type: 'text',
-						onChange: this.handleInputChange })
+					'h4',
+					{ className: 'title is-4' },
+					'New Entry :'
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'field' },
+					{ className: 'columns' },
 					_react2.default.createElement(
-						'label',
-						{ className: 'label' },
-						'Gallons'
+						'div',
+						{ className: 'column is-5' },
+						_react2.default.createElement(
+							'form',
+							{ onSubmit: this.handleSubmit },
+							_react2.default.createElement(
+								'div',
+								{ className: 'field' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label' },
+									'Miles'
+								),
+								_react2.default.createElement('input', { className: 'input',
+									name: 'miles',
+									type: 'text',
+									onChange: this.handleInputChange,
+									onKeyUp: this.handleCalcs })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'field' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label' },
+									'Gallons'
+								),
+								_react2.default.createElement('input', { className: 'input',
+									name: 'gallons',
+									type: 'text',
+									onChange: this.handleInputChange,
+									onKeyUp: this.handleCalcs })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'field' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label' },
+									'Price per Gallon'
+								),
+								_react2.default.createElement('input', { className: 'input',
+									name: 'price',
+									type: 'text',
+									onChange: this.handleInputChange,
+									onKeyUp: this.handleCalcs })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'field' },
+								_react2.default.createElement('hr', null),
+								_react2.default.createElement('input', { className: 'button is-info', type: 'submit', value: 'Submit' })
+							)
+						)
 					),
-					_react2.default.createElement('input', { className: 'input',
-						name: 'gallons',
-						type: 'text',
-						onChange: this.handleInputChange })
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'field' },
+					_react2.default.createElement('div', { className: 'column is-1' }),
 					_react2.default.createElement(
-						'label',
-						{ className: 'label' },
-						'Price per Gallon'
-					),
-					_react2.default.createElement('input', { className: 'input',
-						name: 'price',
-						type: 'text',
-						onChange: this.handleInputChange })
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'field' },
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement('input', { className: 'button is-info', type: 'submit', value: 'Submit' })
+						'div',
+						{ className: 'column is-5' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'content' },
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Miles driven', info: this.state.miles }),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Gallons used', info: this.state.gallons }),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Miles/Gallon', info: this.state.mpg }),
+							_react2.default.createElement('hr', null),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Price/Gallon', info: this.state.price }),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Cost of fill-up', info: this.state.totalCost })
+						)
+					)
 				)
 			);
 		}
@@ -24133,6 +24190,181 @@ module.exports = function spread(callback) {
   };
 };
 
+
+/***/ }),
+/* 211 */,
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(51);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(192);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DisplaySnippet = function (_React$Component) {
+	_inherits(DisplaySnippet, _React$Component);
+
+	function DisplaySnippet() {
+		_classCallCheck(this, DisplaySnippet);
+
+		return _possibleConstructorReturn(this, (DisplaySnippet.__proto__ || Object.getPrototypeOf(DisplaySnippet)).apply(this, arguments));
+	}
+
+	_createClass(DisplaySnippet, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h5',
+					{ style: { display: 'inline-block' } },
+					this.props.label,
+					' : \xA0'
+				),
+				_react2.default.createElement(
+					'h4',
+					{ style: { display: 'inline-block', fontWeight: 'bold' } },
+					this.props.info
+				)
+			);
+		}
+	}]);
+
+	return DisplaySnippet;
+}(_react2.default.Component);
+
+exports.default = DisplaySnippet;
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(51);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(192);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _disp_snippet = __webpack_require__(212);
+
+var _disp_snippet2 = _interopRequireDefault(_disp_snippet);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MPGList = function (_React$Component) {
+	_inherits(MPGList, _React$Component);
+
+	function MPGList(props) {
+		_classCallCheck(this, MPGList);
+
+		var _this = _possibleConstructorReturn(this, (MPGList.__proto__ || Object.getPrototypeOf(MPGList)).call(this, props));
+
+		_this.state = {
+			entries: null
+		};
+		_this.componentDidMount = _this.componentDidMount.bind(_this);
+		return _this;
+	}
+
+	_createClass(MPGList, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			_axios2.default.get('/db').then(function (response) {
+				_this2.setState({
+					entries: response.data
+				});
+				console.log(response.data);
+			});
+		}
+
+		//render function dictates what is injected into the index.html page
+
+	}, {
+		key: 'render',
+		value: function render() {
+			var pastEntries = this.state.entries === null ? null : this.state.entries.reverse().slice(0, 4).map(function (entriesArray) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'column is-3 box', style: { backgroundColor: '#dbdbdb', margin: "3px 6px 0px 3px" } },
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Miles driven', info: entriesArray.distance }),
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Gallons used', info: entriesArray.galAmount }),
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Miles/gallon', info: entriesArray.efficiency }),
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Price/Gallon', info: entriesArray.gasPrice }),
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Cost of fill-up', info: entriesArray.totalCost })
+				);
+			});
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'section', style: { padding: "20px 40px 20px 10px" } },
+				_react2.default.createElement(
+					'h4',
+					{ className: 'title is-4' },
+					'Past Entries :'
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'columns' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'column is-12' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'columns' },
+							pastEntries
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return MPGList;
+}(_react2.default.Component);
+
+;
+
+exports.default = MPGList;
 
 /***/ })
 /******/ ]);

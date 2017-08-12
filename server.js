@@ -38,6 +38,16 @@ app.post('/db', function(req,res){
 	  console.log(dataSet);
 	});
 });
+
+app.get('/db', function(req, res){
+	FillUpData.find(function (err, mpgs){
+		if(err){
+			throw err;
+		}
+		res.json(mpgs);
+	})
+})
+
 //SERVER RECEIVES A GET REQUEST. THE REQUEST INCLUDES A ROUTE (undefined at this time), AND A BODY. THE * SHOULD BE REPLACED WITH A / WHEN WE MOVE FROM DEVELOPMENT INTO DEPLOYMENT
 app.get('*', function(req, res){
 	//SERVER LOOKS FOR THE /PUBLIC DIRECTORY, AND SENDS INDEX.HTML BACK TO CLIENT

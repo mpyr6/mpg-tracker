@@ -4,17 +4,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import MPGForm from './components/mpg_form.js';
+import MPGList from './components/mpg_list.js'
 
 class MyApp extends React.Component {
 	render(){
 		return (
 			<div className="container">
-				<h2 className="title">MPG Tracker</h2>
-				<div className="columns">
-					<div className="column is-5 box">
-						<MPGForm />
-					</div>
-				</div>
+				<h2 className="title is-3">MPG Tracker</h2>
+				<MPGForm />
+				<MPGList />
 			</div>
 		);
 	}
