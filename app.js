@@ -3,36 +3,36 @@ const dateFormat = require('dateformat')
 var now = new Date();
 const {MongoClient, ObjectID} = require('mongodb');
 const express = require('express');
-const mongoose = require('mongoose');
+const {mongoose} = require('./server/db/mongoose');
 var fillUpData = require('./models/mpgs');
 
 
 // Input though Terminal
-// const argv = yargs
-//   .options({
-//     miles: {
-//       demand: true,
-//       describe: 'How many miles since last fill-up',
-//       type: 'number'
-//     },
-//     gallons: {
-//       demand: true,
-//       describe: 'How many gallons to fill tank',
-//       type: 'number'
-//     },
-//     price: {
-//       demand: true,
-//       describe: 'Price of gas',
-//       type: 'number'
-//     },
-//     gas: {
-//       demand: true,
-//       describe: 'Gas Type',
-//       choices: [87,89,91]
-//     }
-//   })
-//   .help()
-//   .argv;
+const argv = yargs
+  .options({
+    miles: {
+      demand: true,
+      describe: 'How many miles since last fill-up',
+      type: 'number'
+    },
+    gallons: {
+      demand: true,
+      describe: 'How many gallons to fill tank',
+      type: 'number'
+    },
+    price: {
+      demand: true,
+      describe: 'Price of gas',
+      type: 'number'
+    },
+    gas: {
+      demand: true,
+      describe: 'Gas Type',
+      choices: [87,89,91]
+    }
+  })
+  .help()
+  .argv;
 
 var miles = argv.miles;
 var gallons = argv.gallons;
@@ -44,9 +44,6 @@ var mpg = (range, fuel) => {
 };
 
 
-
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/MPG_Calculator',{useMongoClient: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB - Conneciton Error'));
 
