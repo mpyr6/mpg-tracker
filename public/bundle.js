@@ -10465,13 +10465,21 @@ var MyApp = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: 'container' },
 				_react2.default.createElement(
-					'h1',
-					null,
-					'Testing'
+					'h2',
+					{ className: 'title' },
+					'MPG Tracker'
 				),
-				_react2.default.createElement(_mpg_form2.default, null)
+				_react2.default.createElement(
+					'div',
+					{ className: 'columns' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'column is-5 box' },
+						_react2.default.createElement(_mpg_form2.default, null)
+					)
+				)
 			);
 		}
 	}]);
@@ -23197,28 +23205,50 @@ var MPGForm = function (_React$Component) {
 				'form',
 				{ onSubmit: this.handleSubmit },
 				_react2.default.createElement(
-					'label',
-					null,
-					'Miles',
-					_react2.default.createElement('input', { name: 'miles', type: 'text', onChange: this.handleInputChange })
+					'div',
+					{ className: 'field' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'label' },
+						'Miles'
+					),
+					_react2.default.createElement('input', { className: 'input',
+						name: 'miles',
+						type: 'text',
+						onChange: this.handleInputChange })
 				),
-				_react2.default.createElement('br', null),
 				_react2.default.createElement(
-					'label',
-					null,
-					'Gallons',
-					_react2.default.createElement('input', { name: 'gallons', type: 'text', onChange: this.handleInputChange })
+					'div',
+					{ className: 'field' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'label' },
+						'Gallons'
+					),
+					_react2.default.createElement('input', { className: 'input',
+						name: 'gallons',
+						type: 'text',
+						onChange: this.handleInputChange })
 				),
-				_react2.default.createElement('br', null),
 				_react2.default.createElement(
-					'label',
-					null,
-					'Price',
-					_react2.default.createElement('input', { name: 'price', type: 'text', onChange: this.handleInputChange })
+					'div',
+					{ className: 'field' },
+					_react2.default.createElement(
+						'label',
+						{ className: 'label' },
+						'Price per Gallon'
+					),
+					_react2.default.createElement('input', { className: 'input',
+						name: 'price',
+						type: 'text',
+						onChange: this.handleInputChange })
 				),
-				_react2.default.createElement('br', null),
-				_react2.default.createElement('br', null),
-				_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+				_react2.default.createElement(
+					'div',
+					{ className: 'field' },
+					_react2.default.createElement('hr', null),
+					_react2.default.createElement('input', { className: 'button is-info', type: 'submit', value: 'Submit' })
+				)
 			);
 		}
 	}]);

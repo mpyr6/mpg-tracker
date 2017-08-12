@@ -42,20 +42,31 @@ class MPGForm extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<label>Miles
-					<input name="miles" type="text" onChange={this.handleInputChange}/>
-				</label>
-					<br />
-				<label>Gallons
-					<input name="gallons" type="text" onChange={this.handleInputChange}/>
-				</label>
-					<br />
-				<label>Price
-					<input name="price" type="text" onChange={this.handleInputChange}/>
-				</label>
-				  <br />
-				  <br />
-				<input type="submit" value="Submit" />
+				<div className="field">
+					<label className="label">Miles</label>
+						<input 	className="input"
+								name="miles"
+								type="text" 
+								onChange={this.handleInputChange}/>
+				</div>
+				<div className="field">
+					<label className="label">Gallons</label>
+					<input 	className="input"
+							name="gallons"
+							type="text" 
+							onChange={this.handleInputChange}/>
+				</div>
+				<div className="field">
+					<label className="label">Price per Gallon</label>
+					<input 	className="input"
+							name="price"
+							type="text" 
+							onChange={this.handleInputChange}/>
+				</div>
+				<div className="field">
+					<hr />
+					<input className="button is-info" type="submit" value="Submit" />
+				</div>
 			</form>
 		)
 	}

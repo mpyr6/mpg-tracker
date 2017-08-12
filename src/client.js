@@ -8,9 +8,13 @@ import MPGForm from './components/mpg_form.js';
 class MyApp extends React.Component {
 	render(){
 		return (
-			<div>
-				<h1>Testing</h1>
-				<MPGForm />
+			<div className="container">
+				<h2 className="title">MPG Tracker</h2>
+				<div className="columns">
+					<div className="column is-5 box">
+						<MPGForm />
+					</div>
+				</div>
 			</div>
 		);
 	}
