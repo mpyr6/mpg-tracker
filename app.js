@@ -45,7 +45,7 @@ var mpg = (range, fuel) => {
 
 
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB - Conneciton Error'));
+db.on('error', console.error.bind(console, 'MongoDB - Connection Error'));
 
 var entry = {
   filldate: date,
@@ -78,3 +78,5 @@ fillUpData.create(entry, function(err, datas){
 //
 //
 // });
+
+module.exports = {entry};
