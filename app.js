@@ -44,24 +44,24 @@ var mpg = (range, fuel) => {
 };
 
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB - Connection Error'));
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'MongoDB - Connection Error'));
 
-var entry = {
-  filldate: date,
-  distance: miles,
-  galAmount: gallons,
-  efficiency: mpg(miles,gallons),
-  gasPrice: price,
-  fuel: gas
-};
+// var entry = {
+//   filldate: date,
+//   distance: miles,
+//   galAmount: gallons,
+//   efficiency: mpg(miles,gallons),
+//   gasPrice: price,
+//   fuel: gas
+// };
 
-fillUpData.create(entry, function(err, datas){
-  if(err){
-    throw err;
-  }
-  console.log(datas);
-});
+// fillUpData.create(entry, function(err, datas){
+//   if(err){
+//     throw err;
+//   }
+//   console.log(datas);
+// });
 
 // db.collection('MPG_Database').insertOne({
 //   filldate: date,

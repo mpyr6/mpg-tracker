@@ -2,16 +2,15 @@
 
 const mongoose = require('mongoose');
 
-
 var mpgSchema = mongoose.Schema({
   filldate: String,
   distance: Number,
   galAmount: Number,
   efficiency: Number,
   gasPrice: Number,
-  fuel: Number
+  fuel: String
 });
 
-var fillUpData = mongoose.model('MPG_Database', mpgSchema);
+var FillUpData = mongoose.model('mpg', mpgSchema);
 
-module.exports = fillUpData;
+module.exports = FillUpData;
