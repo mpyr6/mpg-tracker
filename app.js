@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 var fillUpData = require('./models/mpgs');
 
+
 // Input though Terminal
 // const argv = yargs
 //   .options({
@@ -44,7 +45,7 @@ var mpg = (range, fuel) => {
 
 
 
-
+mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost:27017/MPG_Calculator',{useMongoClient: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB - Conneciton Error'));
