@@ -20,6 +20,7 @@ class MPGForm extends React.Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleCalcs = this.handleCalcs.bind(this);
+		this.handleOptionChange = this.handleOptionChange.bind(this);
 	}
 
 	//handleInputChange is called on every change to the inputs (every key-click), this updates the application state to whatever is in the box.
@@ -46,6 +47,12 @@ class MPGForm extends React.Component {
 			mpg:null
 		})
 	}
+
+	handleOptionChange(event) {
+		this.setState({
+		  gasType: event.target.value
+		});
+	 }
 
 	handleInputChange(event) {
 		const target = event.target;
@@ -102,6 +109,36 @@ class MPGForm extends React.Component {
 										onChange={this.handleInputChange}
 										onKeyUp={this.handleCalcs}/>
 							</div>
+							<div className="control">
+							<label className="label">Fuel Type</label>
+							  
+							  <label className="radio" style={{marginRight: "15px"}}>
+							    <input 	type="radio" 
+							    		name="gasType" 
+							    		value={87}
+							    		style={{marginRight: "6px"}} 
+							    		checked={this.state.gasType == 87} 
+							    		onChange={this.handleOptionChange}
+							    		/> 87 </label>
+
+							  <label className="radio" style={{marginRight: "15px"}}>
+							    <input 	type="radio"
+							    		name="gasType"
+							    		value={89}
+							    		style={{marginRight: "6px"}} 
+							    		checked={this.state.gasType == 89}
+							    		 onChange={this.handleOptionChange} 
+							    		/> 89 </label>
+
+							  <label className="radio" style={{marginRight: "15px"}}>
+							    <input 	type="radio" 
+							    		name="gasType"
+							    		value={91}
+							    		style={{marginRight: "6px"}} 
+							    		checked={this.state.gasType == 91}
+							    		onChange={this.handleOptionChange}
+							    		/> 91 </label>
+							</div>
 							<div className="field">
 								<hr />
 								<input className="button is-info" type="submit" value="Submit" />
@@ -117,6 +154,7 @@ class MPGForm extends React.Component {
 							<DisplaySnippet label="Gallons used" info={this.state.gallons} />
 							<DisplaySnippet label="Miles/Gallon" info={this.state.mpg} />
 							<hr />
+							<DisplaySnippet label="Type of Fuel" info={this.state.gasType} />
 							<DisplaySnippet label="Price/Gallon" info={this.state.price} />
 							<DisplaySnippet label="Cost of fill-up" info={this.state.totalCost} />
 						</div>

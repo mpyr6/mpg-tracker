@@ -31,6 +31,7 @@ class MPGList extends React.Component {
 					<DisplaySnippet label="Miles driven" info={entriesArray.distance} />
 					<DisplaySnippet label="Gallons used" info={entriesArray.galAmount} />
 					<DisplaySnippet label="Miles/gallon" info={entriesArray.efficiency} />
+					<DisplaySnippet label="Type of Fuel" info={entriesArray.fuel} />
 					<DisplaySnippet label="Price/Gallon" info={entriesArray.gasPrice} />
 					<DisplaySnippet label="Cost of fill-up" info={entriesArray.totalCost} />
 				</div>

@@ -23241,6 +23241,7 @@ var MPGForm = function (_React$Component) {
 		_this.handleInputChange = _this.handleInputChange.bind(_this);
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
 		_this.handleCalcs = _this.handleCalcs.bind(_this);
+		_this.handleOptionChange = _this.handleOptionChange.bind(_this);
 		return _this;
 	}
 
@@ -23271,6 +23272,13 @@ var MPGForm = function (_React$Component) {
 				gasType: null,
 				totalCost: null,
 				mpg: null
+			});
+		}
+	}, {
+		key: 'handleOptionChange',
+		value: function handleOptionChange(event) {
+			this.setState({
+				gasType: event.target.value
 			});
 		}
 	}, {
@@ -23365,6 +23373,51 @@ var MPGForm = function (_React$Component) {
 							),
 							_react2.default.createElement(
 								'div',
+								{ className: 'control' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label' },
+									'Fuel Type'
+								),
+								_react2.default.createElement(
+									'label',
+									{ className: 'radio', style: { marginRight: "15px" } },
+									_react2.default.createElement('input', { type: 'radio',
+										name: 'gasType',
+										value: 87,
+										style: { marginRight: "6px" },
+										checked: this.state.gasType == 87,
+										onChange: this.handleOptionChange
+									}),
+									' 87 '
+								),
+								_react2.default.createElement(
+									'label',
+									{ className: 'radio', style: { marginRight: "15px" } },
+									_react2.default.createElement('input', { type: 'radio',
+										name: 'gasType',
+										value: 89,
+										style: { marginRight: "6px" },
+										checked: this.state.gasType == 89,
+										onChange: this.handleOptionChange
+									}),
+									' 89 '
+								),
+								_react2.default.createElement(
+									'label',
+									{ className: 'radio', style: { marginRight: "15px" } },
+									_react2.default.createElement('input', { type: 'radio',
+										name: 'gasType',
+										value: 91,
+										style: { marginRight: "6px" },
+										checked: this.state.gasType == 91,
+										onChange: this.handleOptionChange
+									}),
+									' 91 '
+								)
+							),
+							_react2.default.createElement(
+								'div',
 								{ className: 'field' },
 								_react2.default.createElement('hr', null),
 								_react2.default.createElement('input', { className: 'button is-info', type: 'submit', value: 'Submit' }),
@@ -23388,6 +23441,7 @@ var MPGForm = function (_React$Component) {
 							_react2.default.createElement(_disp_snippet2.default, { label: 'Gallons used', info: this.state.gallons }),
 							_react2.default.createElement(_disp_snippet2.default, { label: 'Miles/Gallon', info: this.state.mpg }),
 							_react2.default.createElement('hr', null),
+							_react2.default.createElement(_disp_snippet2.default, { label: 'Type of Fuel', info: this.state.gasType }),
 							_react2.default.createElement(_disp_snippet2.default, { label: 'Price/Gallon', info: this.state.price }),
 							_react2.default.createElement(_disp_snippet2.default, { label: 'Cost of fill-up', info: this.state.totalCost })
 						)
@@ -24345,6 +24399,7 @@ var MPGList = function (_React$Component) {
 					_react2.default.createElement(_disp_snippet2.default, { label: 'Miles driven', info: entriesArray.distance }),
 					_react2.default.createElement(_disp_snippet2.default, { label: 'Gallons used', info: entriesArray.galAmount }),
 					_react2.default.createElement(_disp_snippet2.default, { label: 'Miles/gallon', info: entriesArray.efficiency }),
+					_react2.default.createElement(_disp_snippet2.default, { label: 'Type of Fuel', info: entriesArray.fuel }),
 					_react2.default.createElement(_disp_snippet2.default, { label: 'Price/Gallon', info: entriesArray.gasPrice }),
 					_react2.default.createElement(_disp_snippet2.default, { label: 'Cost of fill-up', info: entriesArray.totalCost })
 				);
