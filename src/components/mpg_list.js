@@ -27,7 +27,7 @@ class MPGList extends React.Component {
 	render() {
 		const pastEntries = (this.state.entries === null) ? null : this.state.entries.reverse().slice(0, 4).map(function(entriesArray){
 			return(
-				<div className="column is-3 box" style={{backgroundColor: '#dbdbdb', margin: "3px 6px 0px 3px"}}>						
+				<div className="column is-3 box" style={{backgroundColor: '#dbdbdb', margin: "3px 6px 6px 3px"}}>						
 					<DisplaySnippet label="Miles driven" info={entriesArray.distance} />
 					<DisplaySnippet label="Gallons used" info={entriesArray.galAmount} />
 					<DisplaySnippet label="Miles/gallon" info={entriesArray.efficiency} />

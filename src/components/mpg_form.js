@@ -36,6 +36,17 @@ class MPGForm extends React.Component {
 		});
 	}
 
+	handleClear() {
+		this.setState({
+			miles:null, 
+			gallons:null, 
+			price:null,
+			gasType:null,
+			totalCost:null,
+			mpg:null
+		})
+	}
+
 	handleInputChange(event) {
 		const target = event.target;
 		const value = target.value;
@@ -94,6 +105,7 @@ class MPGForm extends React.Component {
 							<div className="field">
 								<hr />
 								<input className="button is-info" type="submit" value="Submit" />
+								<button className="button is-danger" style={{marginLeft: "3px"}} onClick={this.handleClear}>Clear Form</button>
 							</div>
 						</form>
 					</div>
